@@ -1,8 +1,16 @@
 package com.jpmc.midascore.foundation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Getter
+@Setter
+@Builder
+@Data
 public class Balance {
     private float amount;
 
@@ -11,10 +19,6 @@ public class Balance {
 
     public Balance(float amount) {
         this.amount = amount;
-    }
-
-    public float getAmount() {
-        return amount;
     }
 
     public void setAmount(float amount) {

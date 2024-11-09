@@ -1,0 +1,4 @@
+spring:
+
+general:
+  kafka-topic: "test-topic"
