@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
-@SpringBootTest
+@SpringBootTest(classes = MidasCoreApplication.class)
 @Slf4j
 class TaskOneTests {
     static final Logger logger = LoggerFactory.getLogger(TaskOneTests.class);
@@ -21,7 +21,8 @@ class TaskOneTests {
             logger.info("----------------------------------------------------------");
             logger.info("Congrats! It looks like your application booted without issue");
             logger.info("submit the following output to complete the task (include begin and end output denotations)");
-            StringBuilder output = new StringBuilder("\n").append("---begin output ---").append("\n");
+            logger.info("----------------------------------------------------------");
+            StringBuilder output = new StringBuilder("\n").append("----------------- begin output -----------------").append("\n");
             for (int i = 0; i < 10; i++) {
                 output.append(String.valueOf((int) Math.floor(Math.pow(i, i))));
             }

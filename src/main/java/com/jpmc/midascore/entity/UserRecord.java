@@ -3,27 +3,34 @@ package com.jpmc.midascore.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+import java.util.UUID;
+
+@Getter
 @Entity
 @Data
-@Getter
 @Setter
 @ToString
 @Builder
 @AllArgsConstructor
+@Table(name = "users")
 public class UserRecord {
 
     @Id
-    @GeneratedValue()
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @Getter
-    @Column(nullable = false)
+    @Column(name = "user_name", nullable = false)
     private String name;
 
     @Setter
-    @Getter
-    @Column(nullable = false)
+    @Column(name = "balance", nullable = false)
     private float balance;
+
+//    @OneToMany(mappedBy = "sender")
+//    private List<TransactionRecord> transactions;
 
     protected UserRecord() {
     }
@@ -31,15 +38,6 @@ public class UserRecord {
     public UserRecord(String name, float balance) {
         this.name = name;
         this.balance = balance;
-    }
-
-//    @Override
-//    public String toString() {
-//        return String.format("User[id=%d, name='%s', balance='%f'", id, name, balance);
-//    }
-
-    public Long getId() {
-        return id;
     }
 
 }

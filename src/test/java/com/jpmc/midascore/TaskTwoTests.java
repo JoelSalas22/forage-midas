@@ -1,5 +1,8 @@
 package com.jpmc.midascore;
 
+import com.jpmc.midascore.foundation.Transaction;
+import com.jpmc.midascore.producer.KafkaProducer;
+import com.jpmc.midascore.service.listener.KafkaTransactionListener;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.annotation.DirtiesContext;
+import org.testcontainers.shaded.org.checkerframework.checker.units.qual.A;
 
-@SpringBootTest
+@SpringBootTest(classes = MidasCoreApplication.class)
 @DirtiesContext
 @EmbeddedKafka(partitions = 1, brokerProperties = {"listeners=PLAINTEXT://localhost:9092", "port=9092"})
 class TaskTwoTests {
@@ -18,6 +22,9 @@ class TaskTwoTests {
     private KafkaProducer kafkaProducer;
 
     @Autowired
+    private KafkaTransactionListener kafkaListener;
+
+    @Autowired
     private FileLoader fileLoader;
 
     @Test
@@ -25,6 +32,7 @@ class TaskTwoTests {
         String[] transactionLines = fileLoader.loadStrings("/test_data/poiuytrewq.uiop");
         for (String transactionLine : transactionLines) {
             kafkaProducer.send(transactionLine);
+            kafkaListener.listen(transactionLine);
         }
         Thread.sleep(2000);
         logger.info("----------------------------------------------------------");
