@@ -32,9 +32,14 @@ public class TransactionRecord {
     @Column(name = "transaction_amount", nullable = false)
     private float amount;
 
-    public TransactionRecord(UserRecord sender, UserRecord recipient, float amount) {
+    @Column(name = "incentive")
+    private float incentive;
+
+
+    public TransactionRecord(UserRecord sender, UserRecord recipient, float amount, float incentive) {
         this.sender = sender;
         this.recipient = recipient;
         this.amount = amount;
+        this.incentive = incentive;
     }
 }

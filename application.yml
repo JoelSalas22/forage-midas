@@ -13,7 +13,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+server:
+  port: 33400
 #kafka:
 #  key-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
 #  value-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"

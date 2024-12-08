@@ -1,11 +1,10 @@
 package com.jpmc.midascore.foundation;
 
-import lombok.Data;
+import lombok.*;
 import lombok.Getter;
-import lombok.Setter;
 
-
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class Incentive {

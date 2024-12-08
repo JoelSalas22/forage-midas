@@ -61,6 +61,13 @@ public class KafkaTransactionListener {
     }
 
 
+    // Listen to Dead Letter Queue
+    @KafkaListener(topics = "${general.kafka-dead-letter-topic}", groupId = "${general.kafka-group-id}")
+    public void listenDeadLetter(String transaction) {
+        log.error("Dead Letter Queue: " + transaction);
+    }
+
+
     private boolean isValidTransaction(Transaction transaction) {
         // Check if the transaction is valid
         long senderId = transaction.getSenderId();
